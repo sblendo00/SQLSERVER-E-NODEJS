@@ -1,22 +1,16 @@
 extends layout
 
 block content
-
-  form(method='POST' action='/users')
-    div 
-      br 
-      label(for='Unit') Unit:
-      br
-      input(type='text', placeholder='Unit name' name='Unit')
-    div
-      br
-      label(for='Cost') Cost:
-      br
-      input(type='text', placeholder='xy' name='Cost')
-    div
-      br 
-      label(for='Hit_Speed') Hit speed:
-      br
-      input(type='text', placeholder='xy sec' name='Hit_Speed')
-      br
-    button(type='submit') Invia
+  h1= title
+  ul
+    li
+      a.active(href='/') Elenco Unità
+    li
+      a(href='/addUnit') Nuova Unità
+  br
+  each r in re
+    h1 Unit: #{r.Unit}
+    img(src=`/img/${r.Unit}.png`)
+    a(href=`/dettagli/${r.Unit}`) Click for details of: #{r.Unit}
+    br
+    hr

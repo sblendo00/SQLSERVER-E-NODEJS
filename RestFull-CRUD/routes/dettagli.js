@@ -32,16 +32,18 @@ let executeQuery = function (res, query, next) {
 }
 
         function renderPug(res, recordset) {
-            res.render('index', {
-                title: 'Tutte le unità:',
-                re: recordset,
+            console.log(recordset);
+            let re = recordset[0];
+            res.render('dettagli', {
+                title: `${re.Unit}`,
+                re: re,
             });
             
         }
 
         /* GET home page. */
-        router.get('/', function (req, res, next) {
-            let sqlQuery = "select * from dbo.[cr-unit-attributes]";
+        router.get('/:unit', function (req, res, next) {
+              let sqlQuery = `select * from dbo.[cr-unit-attributes] where Unit = '${req.params.unit}'`;
             executeQuery(res, sqlQuery, next);
     });
 
