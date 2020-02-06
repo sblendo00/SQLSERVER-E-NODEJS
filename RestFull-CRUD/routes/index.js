@@ -24,14 +24,14 @@ let executeQuery = function (res, query, next) {
         sql.close();
         return;
       }
-      renderPug(res, result.recordset);
+      MandaPug(res, result.recordset);
       return;
     });
     
   });
 }
 
-        function renderPug(res, recordset) {
+        function MandaPug(res, recordset) {
             res.render('index', {
                 title: 'Tutte le unità:',
                 re: recordset,

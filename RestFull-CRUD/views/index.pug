@@ -10,7 +10,7 @@ block content
   br
   each r in re
     h1 Unit: #{r.Unit}
-    img(src=`/img/${r.Unit}.png`)
-    a(href=`/dettagli/${r.Unit}`) Click for details of: #{r.Unit}
+    a(href=`/dettagli/${r.Unit}`) 
+      img(src=`/img/${r.Unit}.png`)
     br
     hr

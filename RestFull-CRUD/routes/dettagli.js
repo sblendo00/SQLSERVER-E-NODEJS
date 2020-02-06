@@ -24,15 +24,14 @@ let executeQuery = function (res, query, next) {
         sql.close();
         return;
       }
-      renderPug(res, result.recordset);
+      MandaPug(res, result.recordset);
       return;
     });
     
   });
 }
 
-        function renderPug(res, recordset) {
-            console.log(recordset);
+        function MandaPug(res, recordset) {
             let re = recordset[0];
             res.render('dettagli', {
                 title: `${re.Unit}`,
