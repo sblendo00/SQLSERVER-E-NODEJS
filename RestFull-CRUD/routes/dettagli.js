@@ -32,7 +32,7 @@ let executeQuery = function (res, query, next) {
 }
 
         function MandaPug(res, recordset) {
-            let re = recordset[0];
+            let re = recordset[0]; // siccome il risultato è dentro le graffe che a sua volta sono dentro le quadre, noi prendiamo solo l'oggetto nella posizione 0, cioè prendiamo solo un risultato
             res.render('dettagli', {
                 title: `${re.Unit}`,
                 re: re,

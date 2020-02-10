@@ -35,7 +35,7 @@ let executeQuery = function (res, query, next, unit) {
 
 function renderPug(res, unit)
 {
-    let re = unit
+    let re = unit // oggetto re di tipo unit che è il risultato
     res.render('dettagli', {
           title: `Unità aggiunta: ${re.Unit}`,
           re: re,
@@ -44,11 +44,12 @@ function renderPug(res, unit)
 
 router.post('/add', function (req, res, next) {
   // Add a new Unit  
-  let unit = req.body;
+  let unit = req.body; // risultato della form in ADDUNIT.PUG 
   if (!unit) {  //Qui dovremmo testare tutti i campi della richiesta
     res.status(500).json({success: false, message:'Error while connecting database', error:err});
     return;
   }
+  // oggetto che contiene la insert
   let sqlInsert = `INSERT INTO dbo.[cr-unit-attributes]
                      VALUES ('${unit.Unit}','${unit.Cost}','${unit.Hit_Speed}','${unit.Speed}','${unit.Deploy_Time}','${unit.Range}','${unit.Target}','${unit.Count}','${unit.Transport}','${unit.Type}','${unit.Rarity}')`;
   executeQuery(res, sqlInsert, next, unit);

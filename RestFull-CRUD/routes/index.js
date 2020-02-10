@@ -9,40 +9,43 @@ const config = {
     database: 'sblendorio.christian', //(Nome del DB)
 }
 
-let executeQuery = function (res, query, next) {
-  sql.connect(config, function (err) {
+let executeQuery = function (res, query, next) { //query corrisponde ad sqlquery sotto nella get
+  sql.connect(config, function (err) { //fa la connessione con l' ogetto config sopra e gli fa vedere l'errore
     if (err) { //Display error page
       console.log("Error while connecting database :- " + err);
       res.status(500).json({success: false, message:'Error while connecting database', error:err});
       return;
-    }
-    var request = new sql.Request(); // create Request object
+    } 
+    // creo una variabile di tipo sql.request 
+    var request = new sql.Request(); 
+    
     request.query(query, function (err, result) { //Display error page
       if (err) {
         console.log("Error while querying database :- " + err);
         res.status(500).json({success: false, message:'Error while querying database', error:err});
-        sql.close();
+        sql.close();  // chiude la richiesta ad sql
         return;
       }
-      MandaPug(res, result.recordset);
+      // gli manda la funzione
+      MandaPug(res, result.recordset); // resul.recordset è il vettore con dentro il risultato
       return;
     });
     
   });
 }
 
-        function MandaPug(res, recordset) {
+        function MandaPug(res, recordset) { //recordset è il risultato
             res.render('index', {
                 title: 'Tutte le unità:',
-                re: recordset,
+                re: recordset, //creo il classico oggetto per prendere le informazioni dal json 
             });
             
         }
 
-        /* GET home page. */
+        /* ESEGUE LA QUERY SUL SQL E RICHIAMA LA FUNZIONE EXECUTE*/
         router.get('/', function (req, res, next) {
             let sqlQuery = "select * from dbo.[cr-unit-attributes]";
-            executeQuery(res, sqlQuery, next);
+            executeQuery(res, sqlQuery, next);  /*PASSA RES, SQLQUERY (LA QUERY) E L'ERRORE*/
     });
 
     module.exports = router;
