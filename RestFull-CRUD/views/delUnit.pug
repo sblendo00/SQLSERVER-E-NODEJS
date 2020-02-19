@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  ul
+    li
+      a.active(href='../') Elenco Unità
+    li
+      a(href='/addUnit') Nuova Unità 
+    li 
+      a(href='/delUnit') Elimina Unità
+  br
+  form(method='POST' action='/delUnit/del')
+    div  
+      label(for='Unit') Unit:
+      br
+      input(type='text', placeholder='Unit name' name='Unit')
+      br
+    button(type='submit') Invia

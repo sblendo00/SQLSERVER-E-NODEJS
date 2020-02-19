@@ -4,11 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var dettagliRouter = require('./routes/dettagli');
 var addUnitRouter = require('./routes/addUnit');
-
+var delUnitRouter = require('./routes/delUnit');
 var app = express();
 
 // view engine setup
@@ -26,6 +27,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/dettagli', dettagliRouter);
 app.use('/addUnit', addUnitRouter);
+app.use('/delUnit', delUnitRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
