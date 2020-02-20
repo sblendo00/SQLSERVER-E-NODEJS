@@ -11,7 +11,7 @@ const config = {
 }
 
 //Function to connect to database and execute query
-let executeQuery = function (res, query, next, unit) {
+let executeQuery = function (res, query, next) {
     sql.connect(config, function (err) {
         if (err) { //Display error page
             console.log("Error while connecting database :- " + err);
@@ -26,22 +26,15 @@ let executeQuery = function (res, query, next, unit) {
                 sql.close();
                 return;
             }
-            renderPug(res, unit);
-            return;
+           res.status(300).json({ success: true, message: 'aggiornamento riuscito'}); 
         });
 
     });
 }
 
-function renderPug(res, unit) {
-    let re = unit // oggetto re di tipo unit che è il risultato
-    res.render('dettagli', {
-        title: `Unità aggiunta: ${re.Unit}`,
-        re: re,
-    });
-}
 
-router.post('/add', function (req, res, next) {
+
+router.post('/up', function (req, res, next) {
     // Add a new Unit  
     let unit = req.body; // risultato della form in ADDUNIT.PUG 
     if (!unit) {  //Qui dovremmo testare tutti i campi della richiesta
@@ -49,14 +42,13 @@ router.post('/add', function (req, res, next) {
         return;
     }
     // oggetto che contiene la insert
-    let sqlInsert = `INSERT INTO dbo.[cr-unit-attributes]
-                     VALUES ('${unit.Unit}','${unit.Cost}','${unit.Hit_Speed}','${unit.Speed}','${unit.Deploy_Time}','${unit.Range}','${unit.Target}','${unit.Count}','${unit.Transport}','${unit.Type}','${unit.Rarity}')`;
-    executeQuery(res, sqlInsert, next, unit);
+    let sqlUpdate = `UPDATE dbo.[cr-unit-attributes] SET ${unit.Attr} = '${unit.Value}' WHERE Unit = '${unit.Unit}'`;
+    executeQuery(res, sqlUpdate, next,);
 });
 
 router.get('/', function (req, res, next) {
-    res.render('addUnit', {
-        title: 'Aggiungi una unità.',
+    res.render('updateUnit', {
+        title: 'Aggiorna una unità.',
     })
 })
 

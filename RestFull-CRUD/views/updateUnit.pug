@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  h1= title
+  ul
+    li
+      a.active(href='../') Elenco Unità
+    li
+      a(href='../addUnit') Nuova Unità
+    li 
+      a(href='/delUnit') Elimina Unità
+    li 
+      a(href = '/upUnit') Aggiorna Unita
+  br
+
+  form(method='POST' action='/upUnit/up')
+    div  
+      label(for='Unit') Unità che vuoi aggiornare:
+      br
+      input(type='text', placeholder='Unit name' name='Unit')
+    div  
+      label(for='Atrtibuto') Attributo che vuoi aggiornare (Unit, Cost, Hit_Speed....):
+      br
+      input(type='text', placeholder='Cost' name='Attr')
+    div  
+      label(for='Nuovo Valore') Nuovo Valore:
+      br
+      input(type='text', placeholder='xy sec' name='Value')
+    button(type='submit') Invia
