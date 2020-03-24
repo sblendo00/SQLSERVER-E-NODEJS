@@ -6,7 +6,7 @@ var createError = require('http-errors');
 const config = {
   user: 'sblendorio.christian',  //Vostro user name
   password: 'xxx123#', //Vostra password
-  server: "213.140.22.23",  //Stringa di connessione
+  server: "213.140.22.237",  //Stringa di connessione
   database: 'sblendorio.christian', //(Nome del DB)
 }
 
@@ -45,10 +45,9 @@ router.get('/search/:name', function (req, res, next) {
   executeQuery(res, sqlQuery, next);
 });
 
-router.post('/', function (req, res, next) {
-  // Add a new Unit  
+router.post('/add', function (req, res, next) { 
   let unit = req.body;
-  if (!unit) {  //Qui dovremmo testare tutti i campi della richiesta
+  if (!unit) {  
     res.status(500).json({success: false, message:'Error while connecting database', error:err});
     return;
   }
