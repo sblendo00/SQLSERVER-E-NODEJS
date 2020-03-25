@@ -4,23 +4,20 @@
   hit speed: {{unit.Hit_Speed}}
 </div>
 
-	<form>
-		<h3>Add a Unit</h3>
-		<div>
-			<label for="unit">Unit:</label>
-			<input name="unit" #newUnit>
+<form>
+	<h3>Add a Unit</h3>
+	<div>
+		<label for="unit">Unit:</label>
+		<input name="unit" #newUnit>
   </div>
-			<div>
-				<label for="cost">Cost:</label>
-				<input name="cost" #newCost>
+	<div>
+		<label for="cost">Cost:</label>
+    <input name="cost" #newCost>
   </div>
-				<div>
-					<label for="hit_speed">Hit_Speed:</label>
-					<input name="hit_speed" #newHitSpeed>
+	<div>
+		<label for="hit_speed">Hit_Speed:</label>
+		<input name="hit_speed" #newHitSpeed>
   </div>
-					<button (click)="addUnit(newUnit, newCost,newHitSpeed)">
-
-  Insert new unit
-  </button>
-	</form>
+	<button (click)="addUnit(newUnit, newCost,newHitSpeed)">Insert new unit</button>
+</form>
 
