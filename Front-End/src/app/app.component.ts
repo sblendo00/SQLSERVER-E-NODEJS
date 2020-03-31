@@ -16,18 +16,15 @@ export class AppComponent implements OnInit {
 
   ngOnInit():void{
 //Qui va sostituito l’url con quello delle vostre api
-    this.obsUnit = this.http.get<Unit[]>('https://3000-ee8c2695-82b9-4f71-838f-d1170330a60b.ws-eu01.gitpod.io/users');
+    this.obsUnit = this.http.get<Unit[]>('https://3000-b8c26e67-67ce-4067-a9ec-198e6bd06dbc.ws-eu01.gitpod.io/users');
     //Mi sottoscrivo all’observable e scrivo la arrow function che riceve i dati
     this.obsUnit.subscribe((data: Unit[]) => { this.data = data; });
   }
 
   addUnit(newUnit: HTMLInputElement, newCost: HTMLInputElement, newHitSpeed: HTMLInputElement): boolean {
-    let newData: Unit = new Unit();
-    newData.Unit = newUnit.value;
-    newData.Cost = newCost.value;
-    newData.Hit_Speed = newHitSpeed.value;
+    let newData = new Unit(newUnit.value, newCost.value, newHitSpeed.value);
     let headers = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-    this.postObserver = this.http.post('https://3000-ee8c2695-82b9-4f71-838f-d1170330a60b.ws-eu01.gitpod.io/users/add', JSON.stringify(newData), headers)
+    this.postObserver = this.http.post('https://3000-b8c26e67-67ce-4067-a9ec-198e6bd06dbc.ws-eu01.gitpod.io/users/add', JSON.stringify(newData), headers)
     this.postObserver.subscribe(data => this.postData = data);
     return false;
   }
